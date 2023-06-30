@@ -11,11 +11,14 @@ const Book = () => {
   const [time, setTime] = useState("");
   const [bookedServices, setBookedServices] = useState([]);
 
+  const formRef = useRef(null); // Create a ref for the form element
+
+
   const makeAppointment = (e) => {
     e.preventDefault();
     const appointment = { serviceName, date, time, email, name };
     console.log(appointment);
-  
+
     fetch("https://understood-camp-production.up.railway.app/appointment/add", {
       method: 'POST',
       credentials: 'include',
@@ -30,21 +33,16 @@ const Book = () => {
         if (response.ok) {
           // Handle success
           console.log('Appointment added to the database.');
-          // Clear the input fields after successful appointment
-          setName('');
-          setEmail('');
-          setServiceName('');
-          setDate('');
-          setTime('');
-          // Fetch the updated list of booked services
-          fetchBookedServices();
+          formRef.current.reset(); // Clear the form fields
+          fetchBookedServices(); // Fetch the updated list of booked services
         }
       })
       .catch((error) => {
         // Handle error
         console.log('An error occurred while adding the appointment.', error);
       });
-  }
+  };
+
 // get data from the database
 const fetchBookedServices = () => {
   fetch("https://understood-camp-production.up.railway.app/appointment/getAll")
@@ -98,7 +96,7 @@ const cancelAppointment = (id) => {
                 <div class=" justify-content-start col-lg-6 py-5">
                     <div class="p-5 my-5" style={{background: "rgba(33, 30, 28, 0.7)"}}>
                         <h1 class="text-white text-center mb-4">Make Appointment</h1>
-                        <form>
+                        <form ref={formRef}>
                             <div class="form-row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
