@@ -11,11 +11,11 @@ const Book = () => {
   const [time, setTime] = useState("");
   const [bookedServices, setBookedServices] = useState([]);
 
-  const makeAppointment=(e)=>{
-    e.preventDefault()
-    const appointment = {serviceName, date, time, email, name}
-    console.log(appointment)
-
+  const makeAppointment = (e) => {
+    e.preventDefault();
+    const appointment = { serviceName, date, time, email, name };
+    console.log(appointment);
+  
     fetch("https://understood-camp-production.up.railway.app/appointment/add", {
       method: 'POST',
       credentials: 'include',
@@ -30,9 +30,20 @@ const Book = () => {
         if (response.ok) {
           // Handle success
           console.log('Appointment added to the database.');
-        } 
+          // Clear the input fields after successful appointment
+          setName('');
+          setEmail('');
+          setServiceName('');
+          setDate('');
+          setTime('');
+          // Fetch the updated list of booked services
+          fetchBookedServices();
+        }
       })
-      
+      .catch((error) => {
+        // Handle error
+        console.log('An error occurred while adding the appointment.', error);
+      });
   }
 // get data from the database
 const fetchBookedServices = () => {
