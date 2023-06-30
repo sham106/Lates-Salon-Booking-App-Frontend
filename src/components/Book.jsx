@@ -16,7 +16,7 @@ const Book = () => {
     const appointment = {serviceName, date, time, email, name}
     console.log(appointment)
 
-    fetch("http://localhost:8080/appointment/add", {
+    fetch("https://understood-camp-production.up.railway.app/appointment/add", {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -36,7 +36,7 @@ const Book = () => {
   }
 // get data from the database
 const fetchBookedServices = () => {
-  fetch("http://localhost:8080/appointment/getAll")
+  fetch("https://understood-camp-production.up.railway.app/appointment/getAll")
     .then((res) => res.json())
     .then((result) => {
       setBookedServices(result);
@@ -48,7 +48,7 @@ useEffect(() => {
 }, []);
 
 const cancelAppointment = (id) => {
-  fetch(`http://localhost:8080/appointment/service/${id}`, {
+  fetch(`https://understood-camp-production.up.railway.app/appointment/service/${id}`, {
     method: 'DELETE',
     credentials: 'include',
     headers: {
