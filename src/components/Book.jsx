@@ -19,7 +19,7 @@ const Book = () => {
     const appointment = { serviceName, date, time, email, name };
     console.log(appointment);
 
-    fetch("https://understood-camp-production.up.railway.app/appointment/add", {
+    fetch("https://resonant-eggs-production.up.railway.app/appointment/add", {
       method: 'POST',
       credentials: 'include',
       headers: {
