@@ -45,7 +45,7 @@ const Book = () => {
 
 // get data from the database
 const fetchBookedServices = () => {
-  fetch("https://understood-camp-production.up.railway.app/appointment/getAll")
+  fetch("https://resonant-eggs-production.up.railway.app/appointment/getAll")
     .then((res) => res.json())
     .then((result) => {
       setBookedServices(result);
@@ -57,7 +57,7 @@ useEffect(() => {
 }, []);
 
 const cancelAppointment = (id) => {
-  fetch(`https://understood-camp-production.up.railway.app/appointment/service/${id}`, {
+  fetch(`https://resonant-eggs-production.up.railway.app/appointment/service/${id}`, {
     method: 'DELETE',
     credentials: 'include',
     headers: {
